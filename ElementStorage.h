@@ -47,6 +47,17 @@ class Matrix : public MatrixBase<Matrix<Rows, Cols, DType>, Rows, Cols, DType>
         static_cast<MatrixBase<Matrix<Rows, Cols, DType>, Rows, Cols, DType> &>(*this) = mat;
     }
 
+    template <typename CastType> 
+    Matrix(const Matrix<Rows, Cols, CastType> &other){ 
+        for (int i = 0; i < Rows; ++i)
+        {
+            for (int j = 0; j < Cols; ++j)
+            {
+                (*this)(i, j) = static_cast<DType>(other(i,j));
+            }
+        }
+    }
+
     Matrix &operator=(const Matrix &mat)
     {
         static_cast<MatrixBase<Matrix<Rows, Cols, DType>, Rows, Cols, DType> &>(*this) = mat;
